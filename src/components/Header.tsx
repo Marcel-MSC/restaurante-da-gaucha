@@ -22,9 +22,6 @@ export function Header({ ifoodUrl }: HeaderProps) {
           <a className="btn btnGhost" href="#comoFunciona">
             Como pedir
           </a>
-          <a className="btn btnGhost" href="#depoimentos">
-            Depoimentos
-          </a>
           <a className="btn btnGhost" href="#localizacao">
             Localização
           </a>
