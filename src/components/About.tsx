@@ -5,7 +5,7 @@ export function About() {
         <div className="kicker">Sobre nós</div>
         <h2 className="sectionTitle">Comida de verdade, do jeito simples</h2>
         <p className="sectionLead">
-          O Marmitex da Idi nasceu pra deixar o almoço leve e gostoso: buffet bem cuidado,
+          O Restaurante da Gaucha nasceu pra deixar o almoço leve e gostoso: buffet bem cuidado,
           comida fresca e aquele clima que dá vontade de voltar.
         </p>
 

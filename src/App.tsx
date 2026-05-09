@@ -31,7 +31,7 @@ function App() {
             </p>
             <div style={{ marginTop: 22 }}>
               <MapEmbed
-                title="Marmitex da Idi no Google Maps"
+                title="Restaurante da Gaucha no Google Maps"
                 embedUrl={mapsEmbedUrl}
                 mapsUrl={mapsUrl}
               />

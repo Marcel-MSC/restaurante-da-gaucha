@@ -32,7 +32,7 @@ export function MapEmbed({ title, embedUrl, mapsUrl }: MapEmbedProps) {
           <div>
             <h3 style={{ margin: 0 }}>{title}</h3>
             <p style={{ marginTop: 8 }}>
-              Endereço: Mamitex da Idi - Rua Júlio Alfredo Manuel, 41 - Vila
+              Endereço: Restaurante da Gaucha - Rua Júlio Alfredo Manuel, 41 - Vila
               Reg. Feijó, São Paulo - SP, 03336-030
             </p>
           </div>

@@ -24,7 +24,7 @@ export function Footer() {
                 fontSize: 18,
               }}
             >
-              Marmitex da Idi
+              Restaurante da Gaucha
             </div>
             <div style={{ marginTop: 8, fontSize: 13 }}>
               Horário: Segunda à Sábado • 11:00–15:00
@@ -37,7 +37,7 @@ export function Footer() {
         </div>
 
         <div style={{ marginTop: 18, fontSize: 12, opacity: 0.9 }}>
-          © {new Date().getFullYear()} Marmitex da Idi. Todos os direitos
+          © {new Date().getFullYear()} Restaurante da Gaucha. Todos os direitos
           reservados.
         </div>
       </div>

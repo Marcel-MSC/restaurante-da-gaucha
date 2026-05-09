@@ -10,7 +10,7 @@ export function Hero({ ifoodUrl }: HeroProps) {
       <div className="container heroPaper">
         <div className="heroMedia" aria-hidden="true">
           <div className="heroMediaInner">
-            <div className="heroMediaBadge">Marmitex da Idi</div>
+            <div className="heroMediaBadge">Restaurante da Gaucha</div>
             <div className="heroMediaFood">
               <HeroCarousel />
             </div>

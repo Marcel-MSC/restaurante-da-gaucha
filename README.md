@@ -1,10 +1,10 @@
-# Marmitex da Idi 🍽️
+# Restaurante da Gaucha 🍽️
 
-Site institucional do **Marmitex da Idi** — restaurante de self service à vontade localizado na Vila Regente Feijó, São Paulo - SP.
+Site institucional do **Restaurante da Gaucha** — restaurante de self service à vontade localizado na Vila Regente Feijó, São Paulo - SP.
 
 ## 🧭 Sobre
 
-O Marmitex da Idi nasceu pra deixar o almoço leve e gostoso: buffet bem cuidado, comida fresca e aquele clima que dá vontade de voltar.
+O Restaurante da Gaucha nasceu pra deixar o almoço leve e gostoso: buffet bem cuidado, comida fresca e aquele clima que dá vontade de voltar.
 
 - **Self service à vontade** — monte seu prato e repita com tranquilidade
 - **iFood** — peça pelo app e receba com praticidade
@@ -44,4 +44,4 @@ O deploy é feito automaticamente via Netlify ao fazer push na branch principal.
 
 ## 📄 Licença
 
-Todos os direitos reservados — Marmitex da Idi.
+Todos os direitos reservados — Restaurante da Gaucha.

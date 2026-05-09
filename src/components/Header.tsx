@@ -11,7 +11,7 @@ export function Header({ ifoodUrl }: HeaderProps) {
           aria-label="Voltar para o topo"
           className="siteBrand"
         >
-          <span className="siteBrandName">Marmitex da Idi</span>
+          <span className="siteBrandName">Restaurante da Gaucha</span>
           <span className="siteBrandTag">self service à vontade</span>
         </a>
 
