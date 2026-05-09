@@ -1,31 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-
-type GlobUrlModule = { default: string };
+import { useEffect, useId, useMemo, useState } from "react";
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    if (!mq) return;
-
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setReduced(mq.matches);
     onChange();
-
-    if (typeof mq.addEventListener === "function") {
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
-    }
-
-    // Older Safari
-    // eslint-disable-next-line deprecation/deprecation
-    mq.addListener(onChange);
-    // eslint-disable-next-line deprecation/deprecation
-    return () => mq.removeListener(onChange);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   return reduced;
 }
+
+type UrlModule = { default: string };
 
 function normalizeBasename(url: string) {
   try {
@@ -39,22 +28,49 @@ function normalizeBasename(url: string) {
 
 export function HeroCarousel() {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const frameId = useId();
+  const [clientReady, setClientReady] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [paused, setPaused] = useState(false);
-  const regionId = useRef(`hero-carousel-${Math.random().toString(16).slice(2)}`);
+
+  useEffect(() => {
+    // No pré-render (SSG), import.meta.glob vira caminho /src/... que não existe em produção.
+    // Só após montar no cliente as URLs viram /assets/... corretas no bundle.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount gate intencional para Netlify/SSG
+    setClientReady(true);
+  }, []);
 
   const images = useMemo(() => {
-    const modules = import.meta.glob<GlobUrlModule>("../assets/marmitex-images/*.{png,jpg,jpeg,webp}", {
+    if (!clientReady) return [];
+
+    const png = import.meta.glob<UrlModule>("../assets/marmitex-images/*.png", {
       eager: true,
+      query: "?url",
+      import: "default",
+    });
+    const jpg = import.meta.glob<UrlModule>("../assets/marmitex-images/*.jpg", {
+      eager: true,
+      query: "?url",
+      import: "default",
+    });
+    const jpeg = import.meta.glob<UrlModule>("../assets/marmitex-images/*.jpeg", {
+      eager: true,
+      query: "?url",
+      import: "default",
+    });
+    const webp = import.meta.glob<UrlModule>("../assets/marmitex-images/*.webp", {
+      eager: true,
+      query: "?url",
+      import: "default",
     });
 
-    const urls = Object.values(modules)
+    const urls = [...Object.values(png), ...Object.values(jpg), ...Object.values(jpeg), ...Object.values(webp)]
       .map((m) => m.default)
       .filter(Boolean);
 
     urls.sort((a, b) => normalizeBasename(a).localeCompare(normalizeBasename(b), undefined, { numeric: true }));
     return urls;
-  }, []);
+  }, [clientReady]);
 
   const count = images.length;
 
@@ -70,14 +86,11 @@ export function HeroCarousel() {
     return () => window.clearInterval(t);
   }, [count, paused, prefersReducedMotion]);
 
-  useEffect(() => {
-    if (count === 0) return;
-    setActiveIdx((i) => (i < count ? i : 0));
-  }, [count]);
-
-  if (count === 0) {
+  if (!clientReady || count === 0) {
     return <div className="heroMediaFoodPhoto heroMediaFoodPhoto--fallback" aria-hidden />;
   }
+
+  const slideIdx = activeIdx % count;
 
   const goPrev = () => setActiveIdx((i) => (i - 1 + count) % count);
   const goNext = () => setActiveIdx((i) => (i + 1) % count);
@@ -93,16 +106,16 @@ export function HeroCarousel() {
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <div className="heroCarouselFrame" id={regionId.current}>
+      <div className="heroCarouselFrame" id={frameId}>
         {images.map((src, idx) => (
           <img
             key={src}
-            className={`heroCarouselImg ${idx === activeIdx ? "isActive" : ""}`}
+            className={`heroCarouselImg ${idx === slideIdx ? "isActive" : ""}`}
             src={src}
             alt=""
-            aria-hidden={idx === activeIdx ? undefined : true}
+            aria-hidden={idx === slideIdx ? undefined : true}
             draggable={false}
-            loading={idx === activeIdx ? "eager" : "lazy"}
+            loading={idx === slideIdx ? "eager" : "lazy"}
           />
         ))}
       </div>
@@ -113,7 +126,7 @@ export function HeroCarousel() {
             type="button"
             className="heroCarouselNav heroCarouselNav--prev"
             aria-label="Foto anterior"
-            aria-controls={regionId.current}
+            aria-controls={frameId}
             onClick={goPrev}
           >
             <span aria-hidden>‹</span>
@@ -122,13 +135,13 @@ export function HeroCarousel() {
             type="button"
             className="heroCarouselNav heroCarouselNav--next"
             aria-label="Próxima foto"
-            aria-controls={regionId.current}
+            aria-controls={frameId}
             onClick={goNext}
           >
             <span aria-hidden>›</span>
           </button>
-          <div className="heroCarouselCounter" aria-label={`Foto ${activeIdx + 1} de ${count}`}>
-            {activeIdx + 1}/{count}
+          <div className="heroCarouselCounter" aria-label={`Foto ${slideIdx + 1} de ${count}`}>
+            {slideIdx + 1}/{count}
           </div>
         </>
       ) : null}
