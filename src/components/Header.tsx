@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type HeaderProps = {
   ifoodUrl: string
 }
@@ -6,25 +8,25 @@ export function Header({ ifoodUrl }: HeaderProps) {
   return (
     <header className="siteHeader">
       <div className="container siteHeaderInner">
-        <a
-          href="#topo"
-          aria-label="Voltar para o topo"
+        <Link
+          to="/"
+          aria-label="Ir para a página inicial"
           className="siteBrand"
         >
           <span className="siteBrandName">Restaurante da Gaucha</span>
           <span className="siteBrandTag">self service à vontade</span>
-        </a>
+        </Link>
 
         <nav aria-label="Navegação" className="siteNav">
-          <a className="btn btnGhost" href="#sobre">
+          <Link className="btn btnGhost" to="/sobre">
             Sobre
-          </a>
-          <a className="btn btnGhost" href="#comoFunciona">
+          </Link>
+          <Link className="btn btnGhost" to="/#comoFunciona">
             Como pedir
-          </a>
-          <a className="btn btnGhost" href="#localizacao">
+          </Link>
+          <Link className="btn btnGhost" to="/localizacao">
             Localização
-          </a>
+          </Link>
           <a
             className="btn btnPrimary"
             href={ifoodUrl}
