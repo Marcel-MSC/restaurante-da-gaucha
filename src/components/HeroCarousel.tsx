@@ -1,5 +1,7 @@
 import { useEffect, useId, useMemo, useState } from "react";
 
+import { listHeroCarouselImageUrls } from "../assets/marmitex-images/carouselSources";
+
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
 
@@ -14,18 +16,6 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-type UrlModule = { default: string };
-
-function normalizeBasename(url: string) {
-  try {
-    const clean = url.split("?")[0];
-    const parts = clean.split("/");
-    return parts[parts.length - 1] || clean;
-  } catch {
-    return url;
-  }
-}
-
 export function HeroCarousel() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const frameId = useId();
@@ -34,43 +24,14 @@ export function HeroCarousel() {
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    // No pré-render (SSG), import.meta.glob vira caminho /src/... que não existe em produção.
-    // Só após montar no cliente as URLs viram /assets/... corretas no bundle.
+    // Evita emitir URLs /src/... no HTML estático; no cliente o bundle usa /assets/...
     // eslint-disable-next-line react-hooks/set-state-in-effect -- mount gate intencional para Netlify/SSG
     setClientReady(true);
   }, []);
 
-  const images = useMemo(() => {
-    if (!clientReady) return [];
+  const slideUrls = useMemo(() => listHeroCarouselImageUrls(), []);
 
-    const png = import.meta.glob<UrlModule>("../assets/marmitex-images/*.png", {
-      eager: true,
-      query: "?url",
-      import: "default",
-    });
-    const jpg = import.meta.glob<UrlModule>("../assets/marmitex-images/*.jpg", {
-      eager: true,
-      query: "?url",
-      import: "default",
-    });
-    const jpeg = import.meta.glob<UrlModule>("../assets/marmitex-images/*.jpeg", {
-      eager: true,
-      query: "?url",
-      import: "default",
-    });
-    const webp = import.meta.glob<UrlModule>("../assets/marmitex-images/*.webp", {
-      eager: true,
-      query: "?url",
-      import: "default",
-    });
-
-    const urls = [...Object.values(png), ...Object.values(jpg), ...Object.values(jpeg), ...Object.values(webp)]
-      .map((m) => m.default)
-      .filter(Boolean);
-
-    urls.sort((a, b) => normalizeBasename(a).localeCompare(normalizeBasename(b), undefined, { numeric: true }));
-    return urls;
-  }, [clientReady]);
+  const images = useMemo(() => (clientReady ? slideUrls : []), [clientReady, slideUrls]);
 
   const count = images.length;
 
@@ -86,8 +47,8 @@ export function HeroCarousel() {
     return () => window.clearInterval(t);
   }, [count, paused, prefersReducedMotion]);
 
-  if (!clientReady || count === 0) {
-    return <div className="heroMediaFoodPhoto heroMediaFoodPhoto--fallback" aria-hidden />;
+  if (!clientReady) {
+    return <div className="heroCarousel" aria-hidden />;
   }
 
   const slideIdx = activeIdx % count;
@@ -115,7 +76,8 @@ export function HeroCarousel() {
             alt=""
             aria-hidden={idx === slideIdx ? undefined : true}
             draggable={false}
-            loading={idx === slideIdx ? "eager" : "lazy"}
+            loading="eager"
+            decoding="async"
           />
         ))}
       </div>
@@ -140,7 +102,10 @@ export function HeroCarousel() {
           >
             <span aria-hidden>›</span>
           </button>
-          <div className="heroCarouselCounter" aria-label={`Foto ${slideIdx + 1} de ${count}`}>
+          <div
+            className="heroCarouselCounter"
+            aria-label={`Foto ${slideIdx + 1} de ${count}`}
+          >
             {slideIdx + 1}/{count}
           </div>
         </>
@@ -148,4 +113,3 @@ export function HeroCarousel() {
     </div>
   );
 }
-

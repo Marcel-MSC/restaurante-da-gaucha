@@ -1,21 +1,30 @@
+import { useMemo } from "react";
+
+import { listHeroCarouselImageUrls } from "../assets/marmitex-images/carouselSources";
+import { HeroCarousel } from "./HeroCarousel";
+
 type HeroProps = {
   ifoodUrl: string;
 };
 
-import { HeroCarousel } from "./HeroCarousel";
-
 export function Hero({ ifoodUrl }: HeroProps) {
+  const hasHeroMedia = useMemo(() => listHeroCarouselImageUrls().length > 0, []);
+
   return (
     <section id="topo" className="heroWrap">
-      <div className="container heroPaper">
-        <div className="heroMedia" aria-hidden="true">
-          <div className="heroMediaInner">
-            <div className="heroMediaBadge">Restaurante da Gaucha</div>
-            <div className="heroMediaFood">
-              <HeroCarousel />
+      <div
+        className={`container heroPaper${hasHeroMedia ? "" : " heroPaper--noMedia"}`}
+      >
+        {hasHeroMedia ? (
+          <div className="heroMedia" aria-hidden="true">
+            <div className="heroMediaInner">
+              <div className="heroMediaBadge">Restaurante da Gaucha</div>
+              <div className="heroMediaFood">
+                <HeroCarousel />
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         <div className="heroCopy">
           <div className="kicker">Self service à vontade</div>

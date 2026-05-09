@@ -270,6 +270,17 @@ a {
   color: #2b1a10;
 }
 
+.heroPaper.heroPaper--noMedia {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "copy";
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.heroPaper.heroPaper--noMedia .heroCopy {
+  padding-right: 0;
+}
+
 .heroPaper .kicker {
   color: rgba(43, 26, 16, 0.72);
 }
@@ -338,23 +349,6 @@ a {
   background-repeat: no-repeat;
   transform: rotate(-1deg);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
-}
-
-.heroMediaFoodPhoto {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.heroMediaFoodPhoto--fallback {
-  /* Só o SVG: sem `multiply` nem segundo plano — blend tingia o vetor inteiro de laranja.
-     O laranja do cartão vem de `.heroMedia` (atrás da caixa) e dos gradientes em `.heroMediaFood` (por baixo desta camada só onde o SVG for transparente). */
-  background: url("../assets/file (1).svg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
 }
 
 .heroCarousel {
@@ -612,6 +606,12 @@ a {
     gap: 14px;
   }
 
+  .heroPaper.heroPaper--noMedia {
+    grid-template-areas: "copy";
+    max-width: none;
+    margin-inline: 0;
+  }
+
   .heroMedia {
     min-height: clamp(300px, 44vh, 460px);
   }
@@ -621,10 +621,6 @@ a {
     right: 10%;
     top: 16%;
     bottom: -10%;
-  }
-
-  .heroMediaFoodPhoto--fallback {
-    background-size: 92%;
   }
 
   .heroCopy {
@@ -683,10 +679,6 @@ a {
     right: 8%;
     top: 14%;
     bottom: -12%;
-  }
-
-  .heroMediaFoodPhoto--fallback {
-    background-size: 95%;
   }
 
   .heroMediaBadge {
