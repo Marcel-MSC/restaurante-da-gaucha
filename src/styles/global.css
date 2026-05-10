@@ -1,3 +1,11 @@
+html {
+  scroll-padding-top: 84px;
+}
+
+html {
+  scroll-padding-top: 84px;
+}
+
 :root {
   --bg: #f6efe6;
   --surface: rgba(255, 255, 255, 0.7);

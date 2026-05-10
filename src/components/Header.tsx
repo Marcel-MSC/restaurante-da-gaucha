@@ -21,7 +21,10 @@ export function Header({ ifoodUrl }: HeaderProps) {
           <Link className="btn btnGhost" to="/sobre">
             Sobre
           </Link>
-          <Link className="btn btnGhost" to="/#comoFunciona">
+          <Link
+            className="btn btnGhost"
+            to={{ pathname: "/", hash: "comoFunciona" }}
+          >
             Como pedir
           </Link>
           <Link className="btn btnGhost" to="/localizacao">

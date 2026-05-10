@@ -8,7 +8,10 @@ type HeroProps = {
 };
 
 export function Hero({ ifoodUrl }: HeroProps) {
-  const hasHeroMedia = useMemo(() => listHeroCarouselImageUrls().length > 0, []);
+  const hasHeroMedia = useMemo(
+    () => listHeroCarouselImageUrls().length > 0,
+    [],
+  );
 
   return (
     <section id="topo" className="heroWrap">

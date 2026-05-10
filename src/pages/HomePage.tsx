@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useHead, useSeoMeta } from "@unhead/react";
 import { Hero } from "../components/Hero";
 import { Sections } from "../components/Sections";
@@ -11,7 +13,27 @@ import {
 } from "../siteConstants";
 import { restaurantJsonLd } from "../jsonLd/restaurant";
 
+function scrollToRouteHash(hash: string) {
+  const id = hash.replace(/^#/, "").trim();
+  if (!id) return;
+  const el = document.getElementById(id);
+  if (!el) return;
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({
+    behavior: prefersReduced ? "instant" : "smooth",
+    block: "start",
+  });
+}
+
 export function HomePage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    scrollToRouteHash(location.hash);
+  }, [location.pathname, location.hash]);
+
   useSeoMeta({
     title: "Restaurante da Gaucha no Tatuapé | Self-service à vontade",
     description:
