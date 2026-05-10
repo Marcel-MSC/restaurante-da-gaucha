@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useHead, useSeoMeta } from "@unhead/react";
 import { Hero } from "../components/Hero";
 import { Sections } from "../components/Sections";
 import { About } from "../components/About";
+import { RegionSection } from "../components/RegionSection";
+import { CardapioIntro } from "../components/CardapioIntro";
+import { ContactSection } from "../components/ContactSection";
 import { MapEmbed } from "../components/MapEmbed";
 import {
   IFOOD_URL,
@@ -18,11 +21,9 @@ function scrollToRouteHash(hash: string) {
   if (!id) return;
   const el = document.getElementById(id);
   if (!el) return;
-  const prefersReduced =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   el.scrollIntoView({
-    behavior: prefersReduced ? "instant" : "smooth",
+    // Use "auto" to avoid a visible "top then down" smooth animation.
+    behavior: "auto",
     block: "start",
   });
 }
@@ -30,7 +31,7 @@ function scrollToRouteHash(hash: string) {
 export function HomePage() {
   const location = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     scrollToRouteHash(location.hash);
   }, [location.pathname, location.hash]);
 
@@ -60,7 +61,10 @@ export function HomePage() {
     <>
       <Hero ifoodUrl={IFOOD_URL} />
       <About />
+      <RegionSection />
+      <CardapioIntro />
       <Sections ifoodUrl={IFOOD_URL} />
+      <ContactSection />
       <section id="localizacao" className="section" aria-label="Localização">
         <div className="container">
           <div className="kicker">Unidade</div>

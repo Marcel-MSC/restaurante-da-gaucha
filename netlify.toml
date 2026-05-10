@@ -2,6 +2,27 @@
   command = "npm run build"
   publish = "dist"
 
+# Rotas antigas → home com âncora (SEO agora em `/` + `/localizacao`)
+[[redirects]]
+  from = "/sobre"
+  to = "/#sobre"
+  status = 301
+
+[[redirects]]
+  from = "/contato"
+  to = "/#contato"
+  status = 301
+
+[[redirects]]
+  from = "/como-pedir"
+  to = "/#comoFunciona"
+  status = 301
+
+[[redirects]]
+  from = "/cardapio"
+  to = "/#cardapio"
+  status = 301
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

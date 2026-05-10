@@ -1,36 +1,19 @@
-import { useHead, useSeoMeta } from "@unhead/react";
 import { Link } from "react-router-dom";
-import {
-  IFOOD_URL,
-  INSTAGRAM_URL,
-  SITE_ORIGIN,
-} from "../siteConstants";
+import { IFOOD_URL, INSTAGRAM_URL } from "../siteConstants";
 
-export function ContatoPage() {
-  useSeoMeta({
-    title: "Contato e pedidos | Restaurante da Gaucha",
-    description:
-      "Fale com o Restaurante da Gaucha: Instagram, iFood e horário Seg–Sáb 11h–15h. Self service à vontade na Vila Regente Feijó.",
-    ogTitle: "Contato — Restaurante da Gaucha",
-    ogUrl: `${SITE_ORIGIN}/contato`,
-  });
-
-  useHead({
-    link: [{ rel: "canonical", href: `${SITE_ORIGIN}/contato` }],
-  });
-
+export function ContactSection() {
   return (
-    <section className="section" aria-label="Contato">
+    <section id="contato" className="section" aria-label="Contato">
       <div className="container">
         <div className="kicker">Contato</div>
-        <h1 className="sectionTitle">Como falar com a gente</h1>
+        <h2 className="sectionTitle">Como falar com a gente</h2>
         <p className="sectionLead">
           Horário de funcionamento: <strong>Segunda à Sábado • 11:00–15:00</strong>.
         </p>
 
         <div className="grid3" style={{ marginTop: 22 }}>
           <div className="card">
-            <h2>Instagram</h2>
+            <h3>Instagram</h3>
             <p>Acompanhe novidades e o dia a dia da cozinha.</p>
             <div style={{ marginTop: 14 }}>
               <a
@@ -44,7 +27,7 @@ export function ContatoPage() {
             </div>
           </div>
           <div className="card">
-            <h2>iFood</h2>
+            <h3>iFood</h3>
             <p>Peça pelo app quando não der pra vir presencialmente.</p>
             <div style={{ marginTop: 14 }}>
               <a
@@ -58,7 +41,7 @@ export function ContatoPage() {
             </div>
           </div>
           <div className="card">
-            <h2>Presencial</h2>
+            <h3>Presencial</h3>
             <p>
               Prefere almoçar aqui? Venha no self service à vontade — veja também a
               página de localização.

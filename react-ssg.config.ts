@@ -6,6 +6,6 @@ export default defineReactSsgConfig({
   history: "browser",
   origin: SITE_ORIGIN,
   routes,
-  paths: ["/cardapio", "/localizacao", "/contato", "/sobre"],
+  paths: ["/localizacao"],
   logLevel: "normal",
 });
