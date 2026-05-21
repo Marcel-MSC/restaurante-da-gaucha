@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { IFOOD_URL, INSTAGRAM_URL } from "../siteConstants";
+import {
+  IFOOD_URL,
+  INSTAGRAM_URL,
+  WHATSAPP_CONTACTS,
+  whatsappUrl,
+} from "../siteConstants";
 
 export function ContactSection() {
   return (
@@ -8,8 +13,33 @@ export function ContactSection() {
         <div className="kicker">Contato</div>
         <h2 className="sectionTitle">Como falar com a gente</h2>
         <p className="sectionLead">
-          Horário de funcionamento: <strong>Segunda à Sábado • 11:00–15:00</strong>.
+          Horário de funcionamento:{" "}
+          <strong>Segunda à Sábado • 11:00–15:00</strong>. Pedidos e dúvidas
+          também pelo WhatsApp.
         </p>
+
+        <div className="grid3" style={{ marginTop: 22 }}>
+          {WHATSAPP_CONTACTS.map((contact) => (
+            <div className="card" key={contact.waMeId}>
+              <h3>WhatsApp</h3>
+              <p>
+                Fale com a gente pelo WhatsApp em{" "}
+                <strong>{contact.display}</strong>.
+              </p>
+              <div style={{ marginTop: 14 }}>
+                <a
+                  className="btn btnPrimary"
+                  href={whatsappUrl(contact.waMeId)}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Abrir WhatsApp ${contact.display} (abre em nova aba)`}
+                >
+                  Chamar no WhatsApp
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="grid3" style={{ marginTop: 22 }}>
           <div className="card">
@@ -17,7 +47,7 @@ export function ContactSection() {
             <p>Acompanhe novidades e o dia a dia da cozinha.</p>
             <div style={{ marginTop: 14 }}>
               <a
-                className="btn btnGhost"
+                className="btn btnPrimary"
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
@@ -43,11 +73,11 @@ export function ContactSection() {
           <div className="card">
             <h3>Presencial</h3>
             <p>
-              Prefere almoçar aqui? Venha no self service à vontade — veja também a
-              página de localização.
+              Prefere almoçar aqui? Venha no self service à vontade — veja
+              também a página de localização.
             </p>
             <div style={{ marginTop: 14 }}>
-              <Link className="btn btnGhost" to="/localizacao">
+              <Link className="btn btnPrimary" to="/localizacao">
                 Ver localização
               </Link>
             </div>

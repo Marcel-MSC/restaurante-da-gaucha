@@ -11,3 +11,34 @@ export const MAPS_EMBED_URL =
 
 export const INSTAGRAM_URL =
   "https://www.instagram.com/gaucharestaurantetatuape/";
+
+export type WhatsAppContact = {
+  label: string;
+  display: string;
+  waMeId: string;
+};
+
+export const WHATSAPP_CONTACTS: readonly WhatsAppContact[] = [
+  {
+    label: "WhatsApp 1",
+    display: "(11) 95761-6333",
+    waMeId: "5511957616333",
+  },
+  {
+    label: "WhatsApp 2",
+    display: "(11) 96102-3784",
+    waMeId: "5511961023784",
+  },
+  {
+    label: "WhatsApp 3",
+    display: "(11) 97290-9842",
+    waMeId: "5511972909842",
+  },
+] as const;
+
+export const WHATSAPP_PREFILL_MESSAGE = "Gostaria de realizar um pedido!";
+
+export function whatsappUrl(waMeId: string) {
+  const text = encodeURIComponent(WHATSAPP_PREFILL_MESSAGE);
+  return `https://wa.me/${waMeId}?text=${text}`;
+}

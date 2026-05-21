@@ -21,7 +21,6 @@ export function Hero({ ifoodUrl }: HeroProps) {
         {hasHeroMedia ? (
           <div className="heroMedia" aria-hidden="true">
             <div className="heroMediaInner">
-              <div className="heroMediaBadge">Restaurante da Gaucha</div>
               <div className="heroMediaFood">
                 <HeroCarousel />
               </div>

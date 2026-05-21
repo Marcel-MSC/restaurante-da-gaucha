@@ -1,6 +1,8 @@
 import type { MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { SiteLogo } from "./SiteLogo";
+
 type HeaderProps = {
   ifoodUrl: string
 }
@@ -31,8 +33,7 @@ export function Header({ ifoodUrl }: HeaderProps) {
           aria-label="Ir para o início da página (hero)"
           className="siteBrand"
         >
-          <span className="siteBrandName">Restaurante da Gaucha</span>
-          <span className="siteBrandTag">self service à vontade</span>
+          <SiteLogo variant="header" round />
         </Link>
 
         <nav aria-label="Navegação" className="siteNav">

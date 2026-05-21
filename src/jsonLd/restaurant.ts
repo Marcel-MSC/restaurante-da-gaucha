@@ -1,4 +1,9 @@
-import { SITE_ORIGIN, IFOOD_URL, INSTAGRAM_URL, MAPS_URL } from "../siteConstants";
+import {
+  SITE_ORIGIN,
+  IFOOD_URL,
+  INSTAGRAM_URL,
+  MAPS_URL,
+} from "../siteConstants";
 
 export const restaurantJsonLd = {
   "@context": "https://schema.org",
@@ -39,6 +44,6 @@ export const restaurantJsonLd = {
   ],
   servesCuisine: "Brazilian",
   priceRange: "$$",
-  image: `${SITE_ORIGIN}/favicon.svg`,
-  logo: `${SITE_ORIGIN}/favicon.svg`,
+  image: `${SITE_ORIGIN}/favicon-restaurante-gaucha.svg`,
+  logo: `${SITE_ORIGIN}/favicon-restaurante-gaucha.svg`,
 } as const;
