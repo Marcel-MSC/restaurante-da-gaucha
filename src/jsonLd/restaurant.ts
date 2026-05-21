@@ -1,5 +1,6 @@
 import {
   SITE_ORIGIN,
+  SITE_LOGO_URL,
   IFOOD_URL,
   INSTAGRAM_URL,
   MAPS_URL,
@@ -44,6 +45,6 @@ export const restaurantJsonLd = {
   ],
   servesCuisine: "Brazilian",
   priceRange: "$$",
-  image: `${SITE_ORIGIN}/favicon-restaurante-gaucha.svg`,
-  logo: `${SITE_ORIGIN}/favicon-restaurante-gaucha.svg`,
+  image: `${SITE_ORIGIN}${SITE_LOGO_URL}`,
+  logo: `${SITE_ORIGIN}${SITE_LOGO_URL}`,
 } as const;

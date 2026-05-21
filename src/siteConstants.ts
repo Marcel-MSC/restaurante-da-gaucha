@@ -1,5 +1,8 @@
 export const SITE_ORIGIN = "https://restaurantedagaucha.netlify.app";
 
+/** Em `public/` — URL estável no HTML estático (SSG/Netlify). */
+export const SITE_LOGO_URL = "/logo-restaurante-da-gaucha.png";
+
 export const IFOOD_URL =
   "https://www.ifood.com.br/delivery/sao-paulo-sp/o-meu-bem-vila-regente-feijo/dfbbbb17-efd7-424b-bced-f568457ed90a";
 

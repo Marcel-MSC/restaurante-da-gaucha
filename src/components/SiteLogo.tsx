@@ -1,4 +1,4 @@
-import logoSrc from "../assets/logo-restaurante-da-gaucha.png";
+import { SITE_LOGO_URL } from "../siteConstants";
 
 type SiteLogoProps = {
   variant?: "header" | "hero" | "footer";
@@ -9,7 +9,7 @@ type SiteLogoProps = {
 export function SiteLogo({ variant = "header", round, className }: SiteLogoProps) {
   return (
     <img
-      src={logoSrc}
+      src={SITE_LOGO_URL}
       alt="Restaurante da Gaúcha — self service, marmitas e iFood"
       className={["siteLogo", `siteLogo--${variant}`, round && "siteLogo--round", className]
         .filter(Boolean)
