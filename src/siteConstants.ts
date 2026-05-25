@@ -1,5 +1,8 @@
 export const SITE_ORIGIN = "https://restaurantedagaucha.netlify.app";
 
+/** Google Analytics 4 — must match the ID in index.html gtag snippet. */
+export const GA_MEASUREMENT_ID = "G-1GJG0DSEYH";
+
 /** Em `public/` — URL estável no HTML estático (SSG/Netlify). */
 export const SITE_LOGO_URL = "/logo-restaurante-da-gaucha.png";
 
