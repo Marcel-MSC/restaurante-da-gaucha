@@ -24,6 +24,8 @@ O Restaurante da Gaucha nasceu pra deixar o almoço leve e gostoso: buffet bem c
 
 ## 💻 Desenvolvimento
 
+Requer **Node.js 22+** (ver `.nvmrc`).
+
 ```bash
 # Instalar dependências
 npm install
